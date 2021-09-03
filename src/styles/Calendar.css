@@ -1,0 +1,11 @@
+.calendar {
+  border: 1px solid black;
+  padding: 5px;
+  width: 400px;
+}
+
+.calendar__header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
