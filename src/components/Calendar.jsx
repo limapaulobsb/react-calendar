@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { DateTime, Settings } from 'luxon';
 
-import { DateTime } from 'luxon';
+import CalendarTable from './CalendarTable.jsx';
 import '../styles/Calendar.css';
 
 function Calendar() {
+  Settings.defaultLocale = 'en-US';
   const [dateObj, setDateObj] = useState(DateTime.now());
 
   const changeMonth = {
@@ -24,6 +26,7 @@ function Calendar() {
         </span>
         <input type='button' value='Next' onClick={changeMonth.next} />
       </div>
+      <CalendarTable dateObj={dateObj} />
     </div>
   );
 }

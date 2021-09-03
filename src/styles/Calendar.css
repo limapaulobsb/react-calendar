@@ -9,3 +9,25 @@
   justify-content: space-between;
   width: 100%;
 }
+
+.calendar-table {
+  display: table;
+  width: 100%;
+}
+
+.calendar-table__header {
+  display: table-header-group;
+}
+
+.calendar-table__body {
+  display: table-row-group;
+}
+
+.calendar-table__row {
+  display: table-row;
+}
+
+.calendar-table__cell {
+  display: table-cell;
+  text-align: center;
+}
