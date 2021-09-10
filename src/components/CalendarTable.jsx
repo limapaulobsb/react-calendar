@@ -20,17 +20,18 @@ function CalendarTable({ dateObj }) {
     return dates
       .filter((_el, i) => i < NUMBER_OF_WEEKDAYS)
       .map((el) => (
-        <div key={el.weekdayShort}>
-          {el.weekdayShort}
+        <div key={el.weekdayShort} className='calendar-table__weekday'>
+          <abbr title={el.weekdayLong}>{el.weekdayShort}</abbr>
         </div>
       ));
   };
 
   const renderDates = () => {
     return dates.map((el) => (
-      <button
+      <div
         aria-label={el.toLocaleString(DateTime.DATE_HUGE)}
-        type='button'
+        tabIndex='0'
+        role='button'
         className={cx('calendar-table__date', {
           'text-light': el.month !== dateObj.month,
         })}
@@ -38,7 +39,7 @@ function CalendarTable({ dateObj }) {
         onClick={() => handleClick(el)}
       >
         {el.day}
-      </button>
+      </div>
     ));
   };
 

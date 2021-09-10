@@ -1,42 +1,62 @@
 .calendar {
-  box-sizing: content-box;
+  background-color: white;
   border: 1px solid #eee;
-  padding: 0.5em;
-  height: 25em;
-  width: 20em;
+  border-radius: 6px;
+  box-sizing: content-box;
   display: flex;
   flex-direction: column;
+  height: 400px;
+  padding: 10px;
+  width: 300px;
+}
+
+.calendar abbr {
+  border-bottom: 1px dotted black;
+  text-decoration: none;
+}
+
+.calendar button {
+  background-color: transparent;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .calendar__header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  height: 5em;
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
 }
 
 .calendar-months {
+  column-gap: 10px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 0.5em;
-  column-gap: 0.5em;
   flex-grow: 10;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 10px;
 }
 
-/* .calendar-months__button {
-} */
+.calendar-months__button:hover {
+  background-color: skyblue;
+}
 
 .calendar-table {
-  flex-grow: 10;
   display: grid;
+  flex-grow: 10;
   grid-template-columns: repeat(7, 1fr);
 }
 
 .calendar-table > div {
+  align-items: center;
   border-radius: 50%;
   display: flex;
   justify-content: center;
-  align-items: center;
+}
+
+.calendar-table__weekday {
+  font-weight: bold;
 }
 
 .calendar-table__date:hover {
