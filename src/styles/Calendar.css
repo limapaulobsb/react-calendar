@@ -1,33 +1,47 @@
 .calendar {
-  border: 1px solid black;
-  padding: 5px;
-  width: 400px;
+  box-sizing: content-box;
+  border: 1px solid #eee;
+  padding: 0.5em;
+  height: 25em;
+  width: 20em;
+  display: flex;
+  flex-direction: column;
 }
 
 .calendar__header {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  height: 5em;
 }
+
+.calendar-months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 10px;
+  flex-grow: 10;
+}
+
+/* .calendar-months__button {
+} */
 
 .calendar-table {
-  display: table;
-  width: 100%;
+  flex-grow: 10;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 
-.calendar-table__header {
-  display: table-header-group;
+.calendar-table > div {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.calendar-table__body {
-  display: table-row-group;
+.calendar-table__date:hover {
+  background-color: skyblue;
 }
 
-.calendar-table__row {
-  display: table-row;
-}
-
-.calendar-table__cell {
-  display: table-cell;
-  text-align: center;
+.text-light {
+  color: #999;
 }
