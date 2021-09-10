@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { DateTime } from 'luxon';
 import cx from 'classnames';
 
 function CalendarTable({ dateObj }) {
@@ -12,7 +13,7 @@ function CalendarTable({ dateObj }) {
   }
 
   const handleClick = (obj) => {
-    console.log(obj);
+    console.log(obj.toLocaleString(DateTime.DATE_HUGE));
   };
 
   const renderWeekdays = () => {
@@ -27,7 +28,9 @@ function CalendarTable({ dateObj }) {
 
   const renderDates = () => {
     return dates.map((el) => (
-      <div
+      <button
+        aria-label={el.toLocaleString(DateTime.DATE_HUGE)}
+        type='button'
         className={cx('calendar-table__date', {
           'text-light': el.month !== dateObj.month,
         })}
@@ -35,7 +38,7 @@ function CalendarTable({ dateObj }) {
         onClick={() => handleClick(el)}
       >
         {el.day}
-      </div>
+      </button>
     ));
   };
 

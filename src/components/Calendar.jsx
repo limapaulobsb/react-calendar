@@ -42,18 +42,21 @@ function Calendar() {
         <input
           type='button'
           value='Previous'
-          onClick={() => setDateObj(dateObj.minus({ month: 1 }))}
+          onClick={() => {
+            setDateObj(dateObj.minus(!showMonths ? { month: 1 } : { year: 1 }));
+          }}
         />
         <div>
           <button type='button' onClick={() => setShowMonths(!showMonths)}>
-            {dateObj.monthLong}
+            {!showMonths && dateObj.monthLong} {dateObj.year}
           </button>
-          <span>{dateObj.year}</span>
         </div>
         <input
           type='button'
           value='Next'
-          onClick={() => setDateObj(dateObj.plus({ month: 1 }))}
+          onClick={() => {
+            setDateObj(dateObj.plus(!showMonths ? { month: 1 } : { year: 1 }));
+          }}
         />
       </div>
       {showMonths ? renderMonths() : <CalendarTable dateObj={dateObj} />}

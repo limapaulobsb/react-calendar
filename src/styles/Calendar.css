@@ -10,7 +10,7 @@
 
 .calendar__header {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   height: 5em;
 }
@@ -18,7 +18,8 @@
 .calendar-months {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  row-gap: 10px;
+  row-gap: 0.5em;
+  column-gap: 0.5em;
   flex-grow: 10;
 }
 
