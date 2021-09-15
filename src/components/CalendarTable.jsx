@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import { DateTime } from 'luxon';
 import cx from 'classnames';
 
-function CalendarTable({ dateObj }) {
-  const NUMBER_OF_DATES = 42;
-  const NUMBER_OF_WEEKDAYS = 7;
-  const startDate = dateObj.startOf('month').startOf('week').minus({ day: 1 });
-  const dates = [startDate];
-  for (let i = 1; i < NUMBER_OF_DATES; i++) {
-    dates.push(startDate.plus({ day: i }));
+function CalendarTable({ selectedDt }) {
+  const dates = [];
+  for (let i = 0; i < 42; i++) {
+    dates.push(
+      selectedDt.startOf('month').startOf('week').minus({ day: 1 }).plus({ day: i })
+    );
   }
 
   const handleClick = (obj) => {
@@ -18,9 +17,9 @@ function CalendarTable({ dateObj }) {
 
   const renderWeekdays = () => {
     return dates
-      .filter((_el, i) => i < NUMBER_OF_WEEKDAYS)
+      .filter((_el, i) => i < 7)
       .map((el) => (
-        <div key={el.weekdayShort} className='calendar-table__weekday'>
+        <div key={el.weekdayLong}>
           <abbr title={el.weekdayLong}>{el.weekdayShort}</abbr>
         </div>
       ));
@@ -28,23 +27,23 @@ function CalendarTable({ dateObj }) {
 
   const renderDates = () => {
     return dates.map((el) => (
-      <div
-        aria-label={el.toLocaleString(DateTime.DATE_HUGE)}
-        tabIndex='0'
-        role='button'
-        className={cx('calendar-table__date', {
-          'text-light': el.month !== dateObj.month,
-        })}
+      <button
+        type='button'
         key={el.ordinal}
+        className={cx('calendar__date-button', {
+          'bg--alt': el.ts === DateTime.now().startOf('day').ts,
+        })}
+        aria-label={el.toLocaleString(DateTime.DATE_HUGE)}
         onClick={() => handleClick(el)}
+        disabled={!el.hasSame(selectedDt, 'month')}
       >
         {el.day}
-      </div>
+      </button>
     ));
   };
 
   return (
-    <div className='calendar-table'>
+    <div className='calendar__date-buttons-container'>
       {renderWeekdays()}
       {renderDates()}
     </div>
@@ -52,7 +51,7 @@ function CalendarTable({ dateObj }) {
 }
 
 CalendarTable.propTypes = {
-  dateObj: PropTypes.object.isRequired,
+  selectedDt: PropTypes.object.isRequired,
 };
 
 export default CalendarTable;

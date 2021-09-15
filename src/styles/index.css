@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Besley&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 * {
   box-sizing: border-box;
@@ -11,12 +10,15 @@
 body {
   background-color: lightslategray;
   font-family: 'Roboto', sans-serif;
-  font-family: 'Open Sans', sans-serif;
   font-family: 'Besley', serif;
 }
 
 main {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  margin-top: 100px;
+}
+
+section {
+  margin: 20px;
 }
