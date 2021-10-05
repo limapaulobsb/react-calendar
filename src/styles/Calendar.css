@@ -5,9 +5,15 @@
   box-sizing: content-box;
   display: flex;
   flex-direction: column;
-  height: 360px;
+  height: 320px;
   padding: 10px;
-  width: 300px;
+  width: 260px;
+}
+
+.calendar--absolute {
+  position: absolute;
+  left: 0px;
+  top: 0px;
 }
 
 .calendar abbr {
@@ -64,6 +70,7 @@
   border-radius: 4px;
 }
 
+.calendar__header__arrow-button:disabled,
 .calendar__date-button:disabled,
 .calendar__month-button:disabled {
   cursor: initial;

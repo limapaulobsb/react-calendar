@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 import { DateTime, Settings } from 'luxon';
 import cx from 'classnames';
 
+import CalendarTable from './CalendarTable.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import CalendarTable from './CalendarTable.jsx';
 import '../styles/Calendar.css';
 
 function Calendar({
+  absolute,
   ariaNextBtn = 'Next',
   ariaPrevBtn = 'Previous',
+  customDateClick = () => {},
   lang = 'en-US',
   max = { month: 12, year: 2100 },
   min = { month: 1, year: 1900 },
@@ -63,11 +65,12 @@ function Calendar({
   };
 
   return (
-    <div className='calendar'>
+    <div className={cx('calendar', { 'calendar--absolute': absolute })}>
       <div className='calendar__header'>
         <div>
           <button
             type='button'
+            className='calendar__header__arrow-button'
             aria-label={ariaPrevBtn}
             onClick={() => {
               setSelectedDt(selectedDt.minus(!showMonths ? { month: 1 } : { year: 1 }));
@@ -96,6 +99,7 @@ function Calendar({
         <div>
           <button
             type='button'
+            className='calendar__header__arrow-button'
             aria-label={ariaNextBtn}
             onClick={() => {
               setSelectedDt(selectedDt.plus(!showMonths ? { month: 1 } : { year: 1 }));
@@ -109,14 +113,20 @@ function Calendar({
           </button>
         </div>
       </div>
-      {showMonths ? renderMonths() : <CalendarTable selectedDt={selectedDt} />}
+      {showMonths ? (
+        renderMonths()
+      ) : (
+        <CalendarTable selectedDt={selectedDt} customDateClick={customDateClick} />
+      )}
     </div>
   );
 }
 
 Calendar.propTypes = {
+  absolute: PropTypes.bool,
   ariaPrevBtn: PropTypes.string,
   ariaNextBtn: PropTypes.string,
+  customDateClick: PropTypes.func,
   lang: PropTypes.string,
   min: PropTypes.object,
   max: PropTypes.object,

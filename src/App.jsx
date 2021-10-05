@@ -1,40 +1,45 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import { DateTime } from 'luxon';
 
+import Header from './components/Header';
 import Calendar from './components/Calendar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
+  const inputRef = useRef();
+  const [showCalendar, setShowCalendar] = useState(false);
+
   return (
     <main>
+      <Header />
       <section>
-        <Calendar />
+        <h1>A simple, straightforward, highly customizable calendar in React.</h1>
+        <div>
+          <Calendar />
+        </div>
       </section>
       <section>
-        <Calendar
-          min={{ month: 7, year: 2020 }}
-          max={{ month: 6, year: 2022 }}
-          lang='pt-BR'
-          ariaNextBtn='Próximo'
-          ariaPrevBtn='Anterior'
-        />
+        <div className='relative'>
+          <input type='text' name='' id='' ref={inputRef} disabled />
+          <button type='button' onClick={() => setShowCalendar(true)}>
+            <FontAwesomeIcon icon={faCalendarDay} size='2x' />
+          </button>
+          {showCalendar && (
+            <Calendar
+              absolute={true}
+              customDateClick={(dt) => {
+                setShowCalendar(false);
+                inputRef.current.value = dt.toLocaleString(DateTime.DATE_SHORT);
+              }}
+            />
+          )}
+        </div>
       </section>
       <section>
-        <Calendar
-          min={{ month: 1, year: 2021 }}
-          max={{ month: 12, year: 2021 }}
-          start={{ month: 3, year: 2021 }}
-          lang='it'
-          ariaNextBtn='Prossimo'
-          ariaPrevBtn='Precedente'
-        />
-      </section>
-      <section>
-        <Calendar
-          min={{ month: 10, year: 2021 }}
-          max={{ month: 10, year: 2021 }}
-          lang='fr'
-          ariaNextBtn='Suivant'
-          ariaPrevBtn='Précédent'
-        />
+        <Calendar ariaNextBtn='Próxima data' ariaPrevBtn='Data anterior' lang='pt-BR' />
+        <Calendar ariaNextBtn='Proxima fecha' ariaPrevBtn='Fecha anterior' lang='es' />
+        <Calendar ariaNextBtn='Следующая дата' ariaPrevBtn='Предыдущая дата' lang='ru' />
       </section>
     </main>
   );

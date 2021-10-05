@@ -3,17 +3,13 @@ import PropTypes from 'prop-types';
 import { DateTime } from 'luxon';
 import cx from 'classnames';
 
-function CalendarTable({ selectedDt }) {
+function CalendarTable({ customDateClick, selectedDt }) {
   const dates = [];
   for (let i = 0; i < 42; i++) {
     dates.push(
       selectedDt.startOf('month').startOf('week').minus({ day: 1 }).plus({ day: i })
     );
   }
-
-  const handleClick = (obj) => {
-    console.log(obj.toLocaleString(DateTime.DATE_HUGE));
-  };
 
   const renderWeekdays = () => {
     return dates
@@ -31,10 +27,10 @@ function CalendarTable({ selectedDt }) {
         type='button'
         key={el.ordinal}
         className={cx('calendar__date-button', {
-          'bg--alt': el.ts === DateTime.now().startOf('day').ts,
+          'bg--alt': el.toMillis() === DateTime.now().startOf('day').toMillis(),
         })}
         aria-label={el.toLocaleString(DateTime.DATE_HUGE)}
-        onClick={() => handleClick(el)}
+        onClick={() => customDateClick(el)}
         disabled={!el.hasSame(selectedDt, 'month')}
       >
         {el.day}
@@ -51,6 +47,7 @@ function CalendarTable({ selectedDt }) {
 }
 
 CalendarTable.propTypes = {
+  customDateClick: PropTypes.func,
   selectedDt: PropTypes.object.isRequired,
 };
 
