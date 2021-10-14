@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DateTime } from 'luxon';
 import cx from 'classnames';
 
-function CalendarTable({ customDateClick, selectedDt }) {
+function CalendarTable({ customDateClick, maxDt, minDt, selectedDt }) {
   const dates = [];
   for (let i = 0; i < 42; i++) {
     dates.push(
@@ -25,13 +25,16 @@ function CalendarTable({ customDateClick, selectedDt }) {
     return dates.map((el) => (
       <button
         type='button'
-        key={el.ordinal}
         className={cx('calendar__date-button', {
-          'bg--alt': el.toMillis() === DateTime.now().startOf('day').toMillis(),
+          'bg--alt':
+            el.toMillis() === DateTime.now().startOf('day').toMillis() &&
+            el >= minDt &&
+            el <= maxDt,
         })}
         aria-label={el.toLocaleString(DateTime.DATE_HUGE)}
+        key={el.ordinal}
         onClick={() => customDateClick(el)}
-        disabled={!el.hasSame(selectedDt, 'month')}
+        disabled={!el.hasSame(selectedDt, 'month') || el > maxDt || el < minDt}
       >
         {el.day}
       </button>
@@ -47,7 +50,9 @@ function CalendarTable({ customDateClick, selectedDt }) {
 }
 
 CalendarTable.propTypes = {
-  customDateClick: PropTypes.func,
+  customDateClick: PropTypes.func.isRequired,
+  minDt: PropTypes.object.isRequired,
+  maxDt: PropTypes.object.isRequired,
   selectedDt: PropTypes.object.isRequired,
 };
 

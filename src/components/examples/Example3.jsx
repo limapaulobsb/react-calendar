@@ -9,19 +9,24 @@ function Example3() {
   const [date, setDate] = useState('');
   const [showModal, setShowModal] = useState(false);
 
+  const { day, month, year } = DateTime.now().plus({ day: 1 });
+
   return (
     <div className='example-3'>
-      <button type='button' className='example-3__button' onClick={() => setShowModal(true)}>
+      <button
+        type='button'
+        className='example-3__button'
+        onClick={() => setShowModal(true)}
+      >
         Choose a date
       </button>
       <div className={cx('modal', { 'modal--visible': showModal })}>
-        <Calendar 
+        <Calendar
           customDateClick={(dt) => {
             setDate(dt.toLocaleString(DateTime.DATE_HUGE));
             setShowModal(false);
           }}
-          height='350px'
-          width='280px'
+          min={{ day, month, year }}
         />
       </div>
       <div

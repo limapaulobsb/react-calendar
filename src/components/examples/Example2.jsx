@@ -8,63 +8,105 @@ import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 import '../../styles/Example2.css';
 
 function Example2() {
-  const inputRef1 = useRef();
-  const inputRef2 = useRef();
-  const inputRef3 = useRef();
-  const [showCalendar1, setShowCalendar1] = useState(false);
-  const [showCalendar2, setShowCalendar2] = useState(false);
-  const [showCalendar3, setShowCalendar3] = useState(false);
+  const inputRef = [useRef(), useRef(), useRef()];
+  const [showCalendar, setShowCalendar] = useState(-1);
 
   return (
     <div className='example-2'>
-      <div className='example-2__button-container'>
-        <input type='text' className='example-2__input' name='' id='' ref={inputRef1} disabled />
-        <button type='button' className='example-2__button'  onClick={() => setShowCalendar1(true)}>
-          <FontAwesomeIcon icon={faCalendarDay} />
-        </button>
-        {showCalendar1 && (
-          <div className='example-2__calendar-container'>
-            <Calendar
-              customDateClick={(dt) => {
-                inputRef1.current.value = dt.toLocaleString(DateTime.DATE_SHORT);
-                setShowCalendar1(false);
-              }}
-            />
-          </div>
-        )}
+      <div className='example-2__button-group'>
+        <label htmlFor='first-input'>This month:</label>
+        <div>
+          <input
+            type='text'
+            className='example-2__input'
+            name=''
+            id='first-input'
+            ref={inputRef[0]}
+            disabled
+          />
+          <button
+            type='button'
+            className='example-2__button'
+            onClick={() => setShowCalendar(0)}
+          >
+            <FontAwesomeIcon icon={faCalendarDay} />
+          </button>
+        </div>
       </div>
-      <div className='example-2__button-container'>
-        <input type='text' className='example-2__input' name='' id='' ref={inputRef2} disabled />
-        <button type='button' className='example-2__button' onClick={() => setShowCalendar2(true)}>
-          <FontAwesomeIcon icon={faCalendarDay} />
-        </button>
-        {showCalendar2 && (
-          <div className='example-2__calendar-container'>
-            <Calendar
-              customDateClick={(dt) => {
-                inputRef2.current.value = dt.toLocaleString(DateTime.DATE_SHORT);
-                setShowCalendar2(false);
-              }}
-            />
-          </div>
-        )}
+      <div className='example-2__button-group'>
+        <label htmlFor='second-input'>This year:</label>
+        <div>
+          <input
+            type='text'
+            className='example-2__input'
+            name=''
+            id='second-input'
+            ref={inputRef[1]}
+            disabled
+          />
+          <button
+            type='button'
+            className='example-2__button'
+            onClick={() => setShowCalendar(1)}
+          >
+            <FontAwesomeIcon icon={faCalendarDay} />
+          </button>
+        </div>
       </div>
-      <div className='example-2__button-container'>
-        <input type='text' className='example-2__input' name='' id='' ref={inputRef3} disabled />
-        <button type='button' className='example-2__button' onClick={() => setShowCalendar3(true)}>
-          <FontAwesomeIcon icon={faCalendarDay} />
-        </button>
-        {showCalendar3 && (
-          <div className='example-2__calendar-container'>
-            <Calendar
-              customDateClick={(dt) => {
-                inputRef3.current.value = dt.toLocaleString(DateTime.DATE_SHORT);
-                setShowCalendar3(false);
-              }}
-            />
-          </div>
-        )}
+      <div className='example-2__button-group'>
+        <label htmlFor='third-input'>Custom range:</label>
+        <div>
+          <input
+            type='text'
+            className='example-2__input'
+            name=''
+            id='third-input'
+            ref={inputRef[2]}
+            disabled
+          />
+          <button
+            type='button'
+            className='example-2__button'
+            onClick={() => setShowCalendar(2)}
+          >
+            <FontAwesomeIcon icon={faCalendarDay} />
+          </button>
+        </div>
       </div>
+      {showCalendar === 0 && (
+        <div className='example-2__calendar-container'>
+          <Calendar
+            customDateClick={(dt) => {
+              inputRef[0].current.value = dt.toLocaleString(DateTime.DATE_SHORT);
+              setShowCalendar(-1);
+            }}
+            fixed='month'
+          />
+        </div>
+      )}
+      {showCalendar === 1 && (
+        <div className='example-2__calendar-container'>
+          <Calendar
+            customDateClick={(dt) => {
+              inputRef[1].current.value = dt.toLocaleString(DateTime.DATE_SHORT);
+              setShowCalendar(-1);
+            }}
+            fixed='year'
+          />
+        </div>
+      )}
+      {showCalendar === 2 && (
+        <div className='example-2__calendar-container'>
+          <Calendar
+            customDateClick={(dt) => {
+              inputRef[2].current.value = dt.toLocaleString(DateTime.DATE_SHORT);
+              setShowCalendar(-1);
+            }}
+            max={{ day: 18, month: 2, year: 2022 }}
+            min={{ day: 22, month: 12, year: 2021 }}
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -12,28 +12,33 @@ function Calendar({
   ariaNextBtn = 'Next',
   ariaPrevBtn = 'Previous',
   customDateClick = () => {},
+  fixed,
   fontSize,
   height,
   lang = 'en-US',
-  max = { month: 12, year: 2100 },
-  min = { month: 1, year: 1900 },
+  max = { day: 31, month: 12, year: 2100 },
+  min = { day: 1, month: 1, year: 1900 },
   start,
   width,
 }) {
   Settings.defaultLocale = lang;
 
-  const maxDt = DateTime.fromObject(max);
-  const minDt = DateTime.fromObject(min);
-  const nowDt = DateTime.now().startOf('month');
+  let maxDt;
+  if (fixed) maxDt = DateTime.now().endOf(fixed).startOf('day');
+  else if (max === 'now') maxDt = DateTime.now().startOf('day');
+  else maxDt = DateTime.fromObject(max);
+
+  let minDt;
+  if (fixed) minDt = DateTime.now().startOf(fixed).startOf('day');
+  else if (min === 'now') minDt = DateTime.now().startOf('day');
+  else minDt = DateTime.fromObject(min);
+
+  const nowDt = DateTime.now().startOf('day');
 
   let startDt;
-  if (start) {
-    startDt = DateTime.fromObject(start);
-  } else if (nowDt >= minDt && nowDt <= maxDt) {
-    startDt = DateTime.now().startOf('month');
-  } else {
-    startDt = DateTime.fromObject(min);
-  }
+  if (start) startDt = DateTime.fromObject(start);
+  else if (nowDt >= minDt && nowDt <= maxDt) startDt = DateTime.now().startOf('day');
+  else startDt = DateTime.fromObject(min);
 
   const calendarRef = useRef();
   const [selectedDt, setSelectedDt] = useState(startDt);
@@ -52,13 +57,16 @@ function Calendar({
             type='button'
             key={el.monthLong}
             className={cx('calendar__month-button', {
-              'bg--alt': el.toMillis() === nowDt.toMillis(),
+              'bg--alt':
+                el.toMillis() === nowDt.startOf('month').toMillis() &&
+                el > minDt.startOf('month') &&
+                el < maxDt,
             })}
             onClick={() => {
               setSelectedDt(el);
               setShowMonths(false);
             }}
-            disabled={el < minDt || el > maxDt}
+            disabled={el > maxDt || el < minDt.startOf('month')}
           >
             {el.monthLong}
           </button>
@@ -85,11 +93,11 @@ function Calendar({
               setSelectedDt(selectedDt.minus(!showMonths ? { month: 1 } : { year: 1 }));
             }}
             disabled={
-              (selectedDt.hasSame(minDt, 'month') && selectedDt.hasSame(minDt, 'year')) ||
-              (showMonths && selectedDt.hasSame(minDt, 'year'))
+              (showMonths && selectedDt.hasSame(minDt, 'year')) ||
+              (selectedDt.hasSame(minDt, 'month') && selectedDt.hasSame(minDt, 'year'))
             }
           >
-            <FontAwesomeIcon icon={faChevronLeft} size='2x' />
+            <FontAwesomeIcon icon={faChevronLeft} />
           </button>
         </div>
         <div className='calendar__header__main-button-container'>
@@ -114,18 +122,23 @@ function Calendar({
               setSelectedDt(selectedDt.plus(!showMonths ? { month: 1 } : { year: 1 }));
             }}
             disabled={
-              (selectedDt.hasSame(maxDt, 'month') && selectedDt.hasSame(maxDt, 'year')) ||
-              (showMonths && selectedDt.hasSame(maxDt, 'year'))
+              (showMonths && selectedDt.hasSame(maxDt, 'year')) ||
+              (selectedDt.hasSame(maxDt, 'month') && selectedDt.hasSame(maxDt, 'year'))
             }
           >
-            <FontAwesomeIcon icon={faChevronRight} size='2x' />
+            <FontAwesomeIcon icon={faChevronRight} />
           </button>
         </div>
       </div>
       {showMonths ? (
         renderMonths()
       ) : (
-        <CalendarTable selectedDt={selectedDt} customDateClick={customDateClick} />
+        <CalendarTable
+          customDateClick={customDateClick}
+          maxDt={maxDt}
+          minDt={minDt}
+          selectedDt={selectedDt}
+        />
       )}
     </div>
   );
@@ -136,11 +149,12 @@ Calendar.propTypes = {
   ariaPrevBtn: PropTypes.string,
   ariaNextBtn: PropTypes.string,
   customDateClick: PropTypes.func,
+  fixed: PropTypes.string,
   fontSize: PropTypes.string,
   height: PropTypes.string,
   lang: PropTypes.string,
-  min: PropTypes.object,
-  max: PropTypes.object,
+  min: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  max: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   start: PropTypes.object,
   width: PropTypes.string,
 };

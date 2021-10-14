@@ -65,7 +65,7 @@
 
 .calendar__header__arrow-button {
   color: white;
-  font-size: 1em;
+  font-size: 2em;
 }
 
 .calendar__header__arrow-button:disabled {

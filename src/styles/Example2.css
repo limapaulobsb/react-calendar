@@ -7,7 +7,7 @@
   width: 280px;
 }
 
-.example-2__button-container {
+.example-2__button-group > div {
   align-items: center;
   display: flex;
   justify-content: space-between;

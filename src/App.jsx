@@ -16,7 +16,7 @@ function App() {
           A simple, well commented, highly customizable calendar component for React.
         </h2>
         <div className='hero__calendar-container'>
-          <Calendar height='500px' width='500px' />
+          <Calendar height='500px' width='500px' fixed='month' />
         </div>
       </section>
       <section className='features'>
@@ -30,8 +30,8 @@ function App() {
         </div>
         <div>
           <h3>
-            Other props like <code>max</code>, <code>min</code> and <code>start</code>{' '}
-            allow you to manage avaible date ranges.
+            Props like <code>fixed</code>, <code>max</code> and <code>min</code> allow you
+            to manage avaible date ranges.
           </h3>
           <Example2 />
         </div>
