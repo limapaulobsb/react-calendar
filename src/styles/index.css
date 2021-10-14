@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Besley&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
   box-sizing: border-box;
@@ -8,75 +7,151 @@
 }
 
 body {
-  font-family: 'Besley', serif;
-  font-family: 'Roboto', sans-serif;
+  color: white;
+  font-family: 'Poppins', sans-serif;
 }
 
-.relative {
-  align-items: center;
-  display: flex;
-  position: relative;
+
+h1 {
+  font-size: 2.5rem;
+  margin: 80px 0 40px;
 }
 
-.relative > input {
-  border: none;
-  font-family: inherit;
-  font-size: 1.5em;
-  height: 40px;
-  margin-right: 10px;
+h2 {
+  font-size: 1.5rem;
+}
+
+.hero > h2 {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 20px;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+h1, h2, h3, h4 {
   text-align: center;
-  width: 200px;
 }
 
-.relative > button {
-  border: none;
-  height: 40px;
-  width: 40px;
+h3, h4 {
+  background-color: rgb(15, 15, 15);
+  padding: 20px;
 }
 
 header {
   align-items: center;
+  background-color: rgb(15, 15, 15);
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0) 50%
+    );
+  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.4);
   display: flex;
   height: 80px;
   justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
 }
 
-section:first-of-type {
+.hero {
   align-items: center;
-  background-color: coral;
+  background-image: url('../assets/universe.jpeg');
+  background-position: center;
+  background-size: cover;
   display: flex;
-  height: calc(100vh - 80px);
+  justify-content: space-evenly;
+  min-height: 100vh;
+}
+
+.hero > * {
+  margin: 0 10px;
+}
+
+.features {
+  background-image: linear-gradient(rgb(15, 15, 15), rgb(30, 30, 45));
+  display: flex;
+  flex-direction: column;
+}
+
+.features > div:first-of-type,
+.features > div:nth-of-type(2) {
+  align-items: center;
+  display: flex;
   justify-content: space-evenly;
 }
 
-section:nth-of-type(2) {
-  align-items: flex-start;
-  background-color: darksalmon;
-  display: flex;
-  height: 400px;
-  justify-content: center;
-  padding: 40px 0;
+.features > div:nth-of-type(2) {
+  background-color: rgb(30, 30, 45);
+  margin: 40px;
+  padding: 20px;
 }
 
-section:nth-of-type(3) {
-  background-color: brown;
+.features > div:nth-of-type(3) {
+  align-items: center;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.languages-container {
+  display: flex;
   justify-content: space-around;
-  padding: 80px 0;
+  flex-wrap: wrap;
+  margin: 40px 0;
+  width: 100%;
 }
 
-section:first-of-type > * {
-  margin: 0 20px;
+.languages-container .calendar {
+  margin-bottom: 20px;
 }
 
-.hero > h1 {
-  text-align: center;
+.adventure {
+  background-color: rgb(15, 15, 15);
+  min-height: calc(100vh - 80px);
+}
+
+.parallax {
+  background-attachment: fixed;
+  background-image: url('../assets/adventure.jpeg');
+  background-position: bottom;
+  background-size: cover;
+  min-height: 400px;
 }
 
 @media screen and (max-width: 768px) {
-  section:first-of-type {
-    align-items: center;
+  h3 {
+    background-color: rgb(30, 30, 45);
+    font-size: 1rem;
+    margin: 20px 0;
+    width: 100%;
+  }
+
+  h4 {
+    background-color: unset;
+    padding: 0;
+  }
+
+  .hero__calendar-container {
+    display: none;
+  }
+
+  .features > div:first-of-type {
     flex-direction: column;
+  }
+
+  .features > div:nth-of-type(2) {
+    background-color: unset;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
   }
 }

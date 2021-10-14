@@ -1,0 +1,71 @@
+.example-3 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.example-3__button {
+  background-color: rgb(60, 90, 255);
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  height: 60px;
+  max-width: 400px;
+  position: relative;
+  transform: rotate(-2deg);
+  width: calc(100% - 20px);
+}
+
+.example-3__button:after {
+  border: 1px solid white;
+  bottom: 4px;
+  content: '';
+  height: 100%;
+  left: 4px;
+  position: absolute;
+  width: 100%;
+}
+
+.example-3__button:hover:after {
+  bottom: 2px;
+  left: 2px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: 0.8s ease-out;
+  visibility: hidden;
+  z-index: 10;
+}
+
+.backdrop--visible {
+  opacity: 0.8;
+  visibility: visible;
+}
+
+.modal {
+  position: fixed;
+  top: 0px;
+  left: calc(50% - 140px);
+  opacity: 0;
+  transition: 0.8s ease;
+  visibility: hidden;
+  z-index: 20;
+}
+
+.modal--visible {
+  top: calc(50% - 230px);
+  opacity: 1;
+  visibility: visible;
+}

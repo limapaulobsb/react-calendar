@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { DateTime, Settings } from 'luxon';
 import cx from 'classnames';
@@ -6,17 +6,19 @@ import cx from 'classnames';
 import CalendarTable from './CalendarTable.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import '../styles/Calendar.css';
+import '../../styles/Calendar.css';
 
 function Calendar({
-  absolute,
   ariaNextBtn = 'Next',
   ariaPrevBtn = 'Previous',
   customDateClick = () => {},
+  fontSize,
+  height,
   lang = 'en-US',
   max = { month: 12, year: 2100 },
   min = { month: 1, year: 1900 },
   start,
+  width,
 }) {
   Settings.defaultLocale = lang;
 
@@ -33,6 +35,7 @@ function Calendar({
     startDt = DateTime.fromObject(min);
   }
 
+  const calendarRef = useRef();
   const [selectedDt, setSelectedDt] = useState(startDt);
   const [showMonths, setShowMonths] = useState(false);
 
@@ -64,8 +67,14 @@ function Calendar({
     );
   };
 
+  useEffect(() => {
+    if (fontSize) calendarRef.current.style.fontSize = fontSize;
+    if (height) calendarRef.current.style.height = height;
+    if (width) calendarRef.current.style.width = width;
+  }, []);
+
   return (
-    <div className={cx('calendar', { 'calendar--absolute': absolute })}>
+    <div className='calendar' ref={calendarRef}>
       <div className='calendar__header'>
         <div>
           <button
@@ -127,10 +136,13 @@ Calendar.propTypes = {
   ariaPrevBtn: PropTypes.string,
   ariaNextBtn: PropTypes.string,
   customDateClick: PropTypes.func,
+  fontSize: PropTypes.string,
+  height: PropTypes.string,
   lang: PropTypes.string,
   min: PropTypes.object,
   max: PropTypes.object,
   start: PropTypes.object,
+  width: PropTypes.string,
 };
 
 export default Calendar;

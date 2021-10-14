@@ -15,7 +15,7 @@ function CalendarTable({ customDateClick, selectedDt }) {
     return dates
       .filter((_el, i) => i < 7)
       .map((el) => (
-        <div key={el.weekdayLong}>
+        <div className='calendar__weekday-container' key={el.weekdayLong}>
           <abbr title={el.weekdayLong}>{el.weekdayShort}</abbr>
         </div>
       ));
