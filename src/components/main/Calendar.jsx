@@ -23,21 +23,26 @@ function Calendar({
 }) {
   Settings.defaultLocale = lang;
 
-  let maxDt;
-  if (fixed) maxDt = DateTime.now().endOf(fixed).startOf('day');
-  else if (max === 'now') maxDt = DateTime.now().startOf('day');
-  else maxDt = DateTime.fromObject(max);
-
-  let minDt;
-  if (fixed) minDt = DateTime.now().startOf(fixed).startOf('day');
-  else if (min === 'now') minDt = DateTime.now().startOf('day');
-  else minDt = DateTime.fromObject(min);
+  let maxDt, minDt;
+  if (typeof fixed === 'string') {
+    maxDt = DateTime.now().endOf(fixed).startOf('day');
+    minDt = DateTime.now().startOf(fixed);
+  } else if (typeof fixed === 'object') {
+    maxDt = DateTime.fromObject(fixed)
+      .endOf(Object.keys(fixed).includes('month') ? 'month' : 'year')
+      .startOf('day');
+    minDt = DateTime.fromObject(fixed);
+  } else {
+    maxDt = max === 'now' ? DateTime.now().startOf('day') : DateTime.fromObject(max);
+    minDt = min === 'now' ? DateTime.now().startOf('day') : DateTime.fromObject(min);
+  }
 
   const nowDt = DateTime.now().startOf('day');
 
   let startDt;
   if (start) startDt = DateTime.fromObject(start);
   else if (nowDt >= minDt && nowDt <= maxDt) startDt = DateTime.now().startOf('day');
+  else if (typeof fixed === 'object') startDt = DateTime.fromObject(fixed);
   else startDt = DateTime.fromObject(min);
 
   const calendarRef = useRef();
@@ -149,7 +154,7 @@ Calendar.propTypes = {
   ariaPrevBtn: PropTypes.string,
   ariaNextBtn: PropTypes.string,
   customDateClick: PropTypes.func,
-  fixed: PropTypes.string,
+  fixed: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   fontSize: PropTypes.string,
   height: PropTypes.string,
   lang: PropTypes.string,

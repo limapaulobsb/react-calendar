@@ -11,6 +11,8 @@ function Example2() {
   const inputRef = [useRef(), useRef(), useRef()];
   const [showCalendar, setShowCalendar] = useState(-1);
 
+  const { year } = DateTime.now().plus({ year: 1 });
+
   return (
     <div className='example-2'>
       <div className='example-2__button-group'>
@@ -34,7 +36,7 @@ function Example2() {
         </div>
       </div>
       <div className='example-2__button-group'>
-        <label htmlFor='second-input'>This year:</label>
+        <label htmlFor='second-input'>Next year:</label>
         <div>
           <input
             type='text'
@@ -91,7 +93,7 @@ function Example2() {
               inputRef[1].current.value = dt.toLocaleString(DateTime.DATE_SHORT);
               setShowCalendar(-1);
             }}
-            fixed='year'
+            fixed={{ year }}
           />
         </div>
       )}
