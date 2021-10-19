@@ -9,14 +9,16 @@ function App() {
   return (
     <main>
       <header>
-        <h2>React Calendar</h2>
+        <h2>Relux Calendar</h2>
       </header>
       <section className='hero'>
         <h2>
-          A simple, well commented, highly customizable calendar component for React.
+          A simple, highly customizable calendar component built with{' '}
+          <a href='https://reactjs.org/'>React</a> and{' '}
+          <a href='https://moment.github.io/luxon'>Luxon</a>.
         </h2>
         <div className='hero__calendar-container'>
-          <Calendar height='500px' width='500px' fixed='month' />
+          <Calendar height='500px' width='500px' fontSize='18px' />
         </div>
       </section>
       <section className='features'>
@@ -38,28 +40,27 @@ function App() {
         <div>
           <h3>Try it in different languages!</h3>
           <h4>*Don&apos;t forget to set proper ARIA labels for better accessibility.</h4>
-          <div className='languages-container'>
+          <div className='languages'>
             <Calendar
-              ariaNextBtn='Próxima data'
-              ariaPrevBtn='Data anterior'
-              lang='pt-BR'
-            />
-            <Calendar
-              ariaNextBtn='Proxima fecha'
-              ariaPrevBtn='Fecha anterior'
               lang='es'
+              ariaNextBtn='Próxima'
+              ariaPrevBtn='Previa'
+              width='280px'
+              height='300px'
             />
+            <Calendar lang='de' ariaNextBtn='Nächste' ariaPrevBtn='Vorherige' />
             <Calendar
-              ariaNextBtn='Следующая дата'
-              ariaPrevBtn='Предыдущая дата'
-              lang='ru'
+              lang='pt-BR'
+              ariaNextBtn='Próxima'
+              ariaPrevBtn='Anterior'
+              width='280px'
+              height='300px'
             />
           </div>
         </div>
       </section>
       <section className='adventure'>
         <div className='parallax' />
-        <h1>Let&apos;s go on an adventure?</h1>
         <Example3 />
       </section>
     </main>

@@ -34,7 +34,7 @@ function CalendarTable({ customDateClick, maxDt, minDt, selectedDt }) {
         aria-label={el.toLocaleString(DateTime.DATE_HUGE)}
         key={el.ordinal}
         onClick={() => customDateClick(el)}
-        disabled={!el.hasSame(selectedDt, 'month') || el > maxDt || el < minDt}
+        disabled={!el.hasSame(selectedDt, 'month') || el < minDt || el > maxDt}
       >
         {el.day}
       </button>
@@ -51,8 +51,8 @@ function CalendarTable({ customDateClick, maxDt, minDt, selectedDt }) {
 
 CalendarTable.propTypes = {
   customDateClick: PropTypes.func.isRequired,
-  minDt: PropTypes.object.isRequired,
   maxDt: PropTypes.object.isRequired,
+  minDt: PropTypes.object.isRequired,
   selectedDt: PropTypes.object.isRequired,
 };
 

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { DateTime, Settings } from 'luxon';
 import cx from 'classnames';
 
-import CalendarTable from './CalendarTable.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import CalendarTable from './CalendarTable';
 import '../../styles/Calendar.css';
 
 function Calendar({
@@ -105,7 +105,7 @@ function Calendar({
             <FontAwesomeIcon icon={faChevronLeft} />
           </button>
         </div>
-        <div className='calendar__header__main-button-container'>
+        <div>
           <button
             type='button'
             className='calendar__header__main-button'
@@ -150,7 +150,6 @@ function Calendar({
 }
 
 Calendar.propTypes = {
-  absolute: PropTypes.bool,
   ariaPrevBtn: PropTypes.string,
   ariaNextBtn: PropTypes.string,
   customDateClick: PropTypes.func,
@@ -158,8 +157,8 @@ Calendar.propTypes = {
   fontSize: PropTypes.string,
   height: PropTypes.string,
   lang: PropTypes.string,
-  min: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   max: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  min: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   start: PropTypes.object,
   width: PropTypes.string,
 };

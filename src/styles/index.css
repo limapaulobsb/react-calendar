@@ -11,20 +11,13 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-
 h1 {
   font-size: 2.5rem;
-  margin: 80px 0 40px;
+  padding: 80px 0 40px;
 }
 
 h2 {
   font-size: 1.5rem;
-}
-
-.hero > h2 {
-  backdrop-filter: blur(4px);
-  background-color: rgba(0, 0, 0, 0.4);
-  padding: 20px;
 }
 
 h3 {
@@ -32,8 +25,7 @@ h3 {
 }
 
 h4 {
-  font-style: italic;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 h1, h2, h3, h4 {
@@ -43,6 +35,12 @@ h1, h2, h3, h4 {
 h3, h4 {
   background-color: rgb(15, 15, 15);
   padding: 20px;
+}
+
+a {
+  border-bottom: 1px solid white;
+  color: inherit;
+  text-decoration: none;
 }
 
 header {
@@ -77,10 +75,14 @@ header {
   margin: 0 10px;
 }
 
+.hero > h2 {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 20px;
+}
+
 .features {
   background-image: linear-gradient(rgb(15, 15, 15), rgb(30, 30, 45));
-  display: flex;
-  flex-direction: column;
 }
 
 .features > div:first-of-type,
@@ -91,9 +93,7 @@ header {
 }
 
 .features > div:nth-of-type(2) {
-  background-color: rgb(30, 30, 45);
-  margin: 40px;
-  padding: 20px;
+  margin: 40px 0;
 }
 
 .features > div:nth-of-type(3) {
@@ -102,15 +102,15 @@ header {
   flex-direction: column;
 }
 
-.languages-container {
+.languages {
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
+  justify-content: space-around;
   margin: 40px 0;
   width: 100%;
 }
 
-.languages-container .calendar {
+.languages .calendar {
   margin-bottom: 20px;
 }
 
@@ -124,7 +124,7 @@ header {
   background-image: url('../assets/adventure.jpeg');
   background-position: bottom;
   background-size: cover;
-  min-height: 400px;
+  height: 400px;
 }
 
 @media screen and (max-width: 768px) {
@@ -137,6 +137,7 @@ header {
 
   h4 {
     background-color: unset;
+    font-size: 0.8rem;
     padding: 0;
   }
 
@@ -145,13 +146,11 @@ header {
   }
 
   .features > div:first-of-type {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   .features > div:nth-of-type(2) {
     background-color: unset;
     flex-direction: column;
-    margin: 0;
-    padding: 0;
   }
 }

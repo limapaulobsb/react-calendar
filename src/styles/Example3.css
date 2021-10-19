@@ -1,7 +1,57 @@
-.example-3 {
+.example-3 > div {
   align-items: center;
   display: flex;
   flex-direction: column;
+}
+
+.example-3 h2 {
+  cursor: pointer;
+  margin: 40px 0 40px;
+  user-select: none;
+}
+
+.example-3 p {
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.example-3 span {
+  font-size: 2.5rem;
+  margin: 40px 0 10px;
+}
+
+.example-3 .backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 100vh;
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  transition: 0.8s ease;
+  visibility: hidden;
+  width: 100%;
+  z-index: 10;
+}
+
+.example-3 .backdrop--visible {
+  opacity: 0.8;
+  visibility: visible;
+}
+
+.example-3 .modal {
+  position: fixed;
+  top: calc(50% - 350px);
+  left: calc(50% - 140px);
+  opacity: 0;
+  transition: 0.8s ease;
+  visibility: hidden;
+  z-index: 20;
+}
+
+.example-3 .modal--visible {
+  opacity: 1;
+  top: calc(50% - 175px);
+  visibility: visible;
 }
 
 .example-3__button {
@@ -33,39 +83,8 @@
   left: 2px;
 }
 
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: 0.8s ease-out;
-  visibility: hidden;
-  z-index: 10;
-}
-
-.backdrop--visible {
-  opacity: 0.8;
-  visibility: visible;
-}
-
-.modal {
-  position: fixed;
-  top: calc(50% - 350px);
-  left: calc(50% - 140px);
-  opacity: 0;
-  transition: 0.8s ease;
-  visibility: hidden;
-  z-index: 20;
-}
-
-.modal--visible {
-  top: calc(50% - 175px);
-  opacity: 1;
-  visibility: visible;
+@media screen and (max-width: 768px) {
+  .example-3 p {
+    font-size: 0.9em;
+  }
 }

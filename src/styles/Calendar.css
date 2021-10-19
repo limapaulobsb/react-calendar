@@ -1,19 +1,15 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap'); */
-/* @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap'); */
-
 .calendar {
   background-color: white;
   color: black;
   display: flex;
   flex-direction: column;
-  /* font-family: 'Lato', sans-serif; */
-  /* font-family: 'Ubuntu', sans-serif; */
   height: 350px;
   width: 280px;
 }
 
 .calendar abbr {
   border-bottom: 1px dotted black;
+  font-size: 0.8em;
   text-decoration: none;
 }
 
@@ -26,12 +22,8 @@
   background-color: rgb(45, 45, 90);
   display: flex;
   height: 20%;
+  justify-content: space-between;
   padding: 0 10px;
-}
-
-.calendar__header__main-button-container {
-  flex-grow: 10;
-  text-align: center;
 }
 
 .calendar__date-buttons-container {
@@ -43,7 +35,6 @@
 
 .calendar__weekday-container {
   text-align: center;
-  font-size: 0.8em;
 }
 
 .calendar__month-buttons-container {
@@ -69,13 +60,12 @@
 }
 
 .calendar__header__arrow-button:disabled {
-  color:  rgb(30, 0, 60)
+  color:  rgb(30, 30, 30)
 }
 
 .calendar__header__main-button {
   color: white;
   font-size: 1em;
-  font-weight: bold;
 }
 
 .calendar__date-button {

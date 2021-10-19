@@ -8,6 +8,7 @@ import '../../styles/Example1.css';
 function Example1() {
   const [date, setDate] = useState(DateTime.now());
   const [showCalendar, setShowCalendar] = useState(false);
+
   const { day, monthLong, monthShort, year } = date;
 
   return (
@@ -15,7 +16,11 @@ function Example1() {
       <abbr title={monthLong}>{monthShort}</abbr>
       <span>{day}</span>
       <span>{year}</span>
-      <button type='button' className='example-1__button' onClick={() => setShowCalendar(true)}>
+      <button
+        type='button'
+        className='example-1__button'
+        onClick={() => setShowCalendar(true)}
+      >
         Show calendar
       </button>
       <div
