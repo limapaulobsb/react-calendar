@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { DateTime } from 'luxon';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
+
 import Calendar from '../main/Calendar';
-import '../../styles/Example2.css';
+import './Example2.css';
 
 function Example2() {
   const inputRef = [useRef(), useRef(), useRef()];

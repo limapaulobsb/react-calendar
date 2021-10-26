@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 import cx from 'classnames';
 
 import Calendar from '../main/Calendar';
-import '../../styles/Example1.css';
+import './Example1.css';
 
 function Example1() {
   const [date, setDate] = useState(DateTime.now());

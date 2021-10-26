@@ -1,17 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { DateTime } from 'luxon';
 import cx from 'classnames';
 
 import Calendar from '../main/Calendar';
-import '../../styles/Example3.css';
+import './Example3.css';
 
 function Example3() {
+  const intervalRef = useRef();
   const [date, setDate] = useState('');
   const [countDown, setCountDown] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
   const { day: minDay } = DateTime.now().plus({ day: 1 });
   const { day, month, year } = DateTime.now().plus({ year: 1 });
+
+  useEffect(() => {
+    if (date) {
+      const interval = setInterval(() => {
+        setCountDown(countDown - 1);
+      }, 1000);
+      intervalRef.current = interval;
+    }
+    return () => clearInterval(intervalRef.current);
+  }, [date, countDown]);
 
   const renderButton = () => (
     <div>
@@ -26,38 +37,27 @@ function Example3() {
     </div>
   );
 
-  const renderCountDown = () => {
-    return (
-      <div>
-        <h2
-          role='button'
-          aria-label='Open calendar'
-          tabIndex='0'
-          onClick={() => setShowModal(true)}
-          onKeyUp={(event) => {
-            if (event.key === 'Enter') setShowModal(true);
-          }}
-        >{`Cool! Scheduled for ${date}`}</h2>
-        <p>I will literally be counting the seconds until then!</p>
-        <p>
-          In the meantime, take a look at the full code and some other projects on my{' '}
-          <a href='https://github.com/limapaulobsb' target='_blank' rel='noreferrer'>
-            GitHub profile!
-          </a>
-        </p>
-        <span>{countDown.toLocaleString()}</span>
-      </div>
-    );
-  };
-
-  useEffect(() => {
-    const intervalID = setInterval(() => {
-      if (date) {
-        setCountDown(countDown - 1);
-      }
-    }, 1000);
-    return () => clearInterval(intervalID);
-  });
+  const renderCountDown = () => (
+    <div>
+      <h2
+        role='button'
+        aria-label='Open calendar'
+        tabIndex='0'
+        onClick={() => setShowModal(true)}
+        onKeyUp={(event) => {
+          if (event.key === 'Enter') setShowModal(true);
+        }}
+      >{`Cool! Scheduled for ${date}`}</h2>
+      <p>I will literally be counting the seconds until then!</p>
+      <p>
+        In the meantime, take a look at the full code and some other projects on my{' '}
+        <a href='https://github.com/limapaulobsb' target='_blank' rel='noreferrer'>
+          GitHub profile!
+        </a>
+      </p>
+      <span>{countDown.toLocaleString()}</span>
+    </div>
+  );
 
   return (
     <div className='example-3'>

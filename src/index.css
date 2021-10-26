@@ -63,7 +63,7 @@ header {
 
 .hero {
   align-items: center;
-  background-image: url('../assets/universe.jpeg');
+  background-image: url('./assets/universe.jpeg');
   background-position: center;
   background-size: cover;
   display: flex;
@@ -121,7 +121,7 @@ header {
 
 .parallax {
   background-attachment: fixed;
-  background-image: url('../assets/adventure.jpeg');
+  background-image: url('./assets/adventure.jpeg');
   background-position: bottom;
   background-size: cover;
   height: 400px;

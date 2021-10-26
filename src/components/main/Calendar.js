@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { DateTime, Settings } from 'luxon';
 import cx from 'classnames';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
 import CalendarTable from './CalendarTable';
-import '../../styles/Calendar.css';
+import './Calendar.css';
 
 function Calendar({
   ariaNextBtn = 'Next',
@@ -18,6 +18,7 @@ function Calendar({
   lang = 'en-US',
   max = { day: 31, month: 12, year: 2100 },
   min = { day: 1, month: 1, year: 1900 },
+  monthsOnly,
   start,
   width,
 }) {
@@ -47,9 +48,64 @@ function Calendar({
 
   const calendarRef = useRef();
   const [selectedDt, setSelectedDt] = useState(startDt);
-  const [showMonths, setShowMonths] = useState(false);
+  const [showMonths, setShowMonths] = useState(monthsOnly);
 
-  const renderMonths = () => {
+  useEffect(() => {
+    if (fontSize) calendarRef.current.style.fontSize = fontSize;
+    if (height) calendarRef.current.style.height = height;
+    if (width) calendarRef.current.style.width = width;
+  }, [fontSize, height, width]);
+
+  const renderCalendarHeader = () => (
+    <div className='calendar__header'>
+      <div>
+        <button
+          type='button'
+          className='calendar__header__arrow-button'
+          aria-label={ariaPrevBtn}
+          onClick={() => {
+            setSelectedDt(selectedDt.minus(!showMonths ? { month: 1 } : { year: 1 }));
+          }}
+          disabled={
+            (showMonths && selectedDt.hasSame(minDt, 'year')) ||
+            (selectedDt.hasSame(minDt, 'month') && selectedDt.hasSame(minDt, 'year'))
+          }
+        >
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </button>
+      </div>
+      <div className='calendar__header__main-button-container'>
+        <button
+          type='button'
+          className='calendar__header__main-button'
+          onClick={() => setShowMonths(!showMonths)}
+          disabled={
+            showMonths || (minDt.hasSame(maxDt, 'month') && minDt.hasSame(maxDt, 'year'))
+          }
+        >
+          {!showMonths && selectedDt.monthLong} {selectedDt.year}
+        </button>
+      </div>
+      <div>
+        <button
+          type='button'
+          className='calendar__header__arrow-button'
+          aria-label={ariaNextBtn}
+          onClick={() => {
+            setSelectedDt(selectedDt.plus(!showMonths ? { month: 1 } : { year: 1 }));
+          }}
+          disabled={
+            (showMonths && selectedDt.hasSame(maxDt, 'year')) ||
+            (selectedDt.hasSame(maxDt, 'month') && selectedDt.hasSame(maxDt, 'year'))
+          }
+        >
+          <FontAwesomeIcon icon={faChevronRight} />
+        </button>
+      </div>
+    </div>
+  );
+
+  const renderMonthButtons = () => {
     const months = [];
     for (let i = 0; i < 12; i++) {
       months.push(selectedDt.startOf('year').plus({ month: i }));
@@ -68,8 +124,12 @@ function Calendar({
                 el < maxDt,
             })}
             onClick={() => {
-              setSelectedDt(el);
-              setShowMonths(false);
+              if (monthsOnly) {
+                customDateClick(el);
+              } else {
+                setSelectedDt(el);
+                setShowMonths(false);
+              }
             }}
             disabled={el > maxDt || el < minDt.startOf('month')}
           >
@@ -80,63 +140,11 @@ function Calendar({
     );
   };
 
-  useEffect(() => {
-    if (fontSize) calendarRef.current.style.fontSize = fontSize;
-    if (height) calendarRef.current.style.height = height;
-    if (width) calendarRef.current.style.width = width;
-  }, []);
-
   return (
     <div className='calendar' ref={calendarRef}>
-      <div className='calendar__header'>
-        <div>
-          <button
-            type='button'
-            className='calendar__header__arrow-button'
-            aria-label={ariaPrevBtn}
-            onClick={() => {
-              setSelectedDt(selectedDt.minus(!showMonths ? { month: 1 } : { year: 1 }));
-            }}
-            disabled={
-              (showMonths && selectedDt.hasSame(minDt, 'year')) ||
-              (selectedDt.hasSame(minDt, 'month') && selectedDt.hasSame(minDt, 'year'))
-            }
-          >
-            <FontAwesomeIcon icon={faChevronLeft} />
-          </button>
-        </div>
-        <div>
-          <button
-            type='button'
-            className='calendar__header__main-button'
-            onClick={() => setShowMonths(!showMonths)}
-            disabled={
-              showMonths ||
-              (minDt.hasSame(maxDt, 'month') && minDt.hasSame(maxDt, 'year'))
-            }
-          >
-            {!showMonths && selectedDt.monthLong} {selectedDt.year}
-          </button>
-        </div>
-        <div>
-          <button
-            type='button'
-            className='calendar__header__arrow-button'
-            aria-label={ariaNextBtn}
-            onClick={() => {
-              setSelectedDt(selectedDt.plus(!showMonths ? { month: 1 } : { year: 1 }));
-            }}
-            disabled={
-              (showMonths && selectedDt.hasSame(maxDt, 'year')) ||
-              (selectedDt.hasSame(maxDt, 'month') && selectedDt.hasSame(maxDt, 'year'))
-            }
-          >
-            <FontAwesomeIcon icon={faChevronRight} />
-          </button>
-        </div>
-      </div>
+      {renderCalendarHeader()}
       {showMonths ? (
-        renderMonths()
+        renderMonthButtons()
       ) : (
         <CalendarTable
           customDateClick={customDateClick}
@@ -159,6 +167,7 @@ Calendar.propTypes = {
   lang: PropTypes.string,
   max: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   min: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  monthsOnly: PropTypes.bool,
   start: PropTypes.object,
   width: PropTypes.string,
 };
