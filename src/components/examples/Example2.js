@@ -14,19 +14,19 @@ function Example2() {
   const { year: currentYear } = DateTime.now();
 
   const renderButtonGroup = (i, label) => (
-    <div className='example-2__button-group'>
+    <div>
       <label htmlFor='first-input'>{label}</label>
-      <div>
+      <div className='example-2-input-group'>
         <input
           type='text'
-          className='example-2__input'
+          className='example-2-input'
           id='first-input'
           ref={inputRef[i]}
           disabled
         />
         <button
           type='button'
-          className='example-2__button'
+          className='example-2-button'
           aria-label='Calendar button'
           onClick={() => setShowCalendar(i)}
         >
@@ -40,7 +40,7 @@ function Example2() {
     <div className='example-2'>
       {renderButtonGroup(0, 'Next month:')}
       {showCalendar === 0 && (
-        <div className='example-2__calendar-container'>
+        <div className='example-2-calendar-container'>
           <Calendar
             customDateClick={(dt) => {
               inputRef[0].current.value = dt.toLocaleString(DateTime.DATE_SHORT);
@@ -52,7 +52,7 @@ function Example2() {
       )}
       {renderButtonGroup(1, 'This year:')}
       {showCalendar === 1 && (
-        <div className='example-2__calendar-container'>
+        <div className='example-2-calendar-container'>
           <Calendar
             customDateClick={(dt) => {
               inputRef[1].current.value = dt.toLocaleString(DateTime.DATE_SHORT);
@@ -65,7 +65,7 @@ function Example2() {
       )}
       {renderButtonGroup(2, 'Custom range:')}
       {showCalendar === 2 && (
-        <div className='example-2__calendar-container'>
+        <div className='example-2-calendar-container'>
           <Calendar
             customDateClick={(dt) => {
               inputRef[2].current.value = dt.toLocaleString(DateTime.DATE_SHORT);

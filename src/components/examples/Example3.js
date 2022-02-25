@@ -37,7 +37,7 @@ function Example3() {
       <h1>Let&apos;s go on an adventure?</h1>
       <button
         type='button'
-        className='example-3__button'
+        className='example-3-button'
         onClick={() => setShowModal(true)}
       >
         Choose a date
@@ -46,7 +46,7 @@ function Example3() {
   );
 
   const renderCountDown = () => (
-    <div>
+    <div className='example-3-countdown-container'>
       <h2
         role='button'
         aria-label='Open calendar'
@@ -71,10 +71,10 @@ function Example3() {
     <div className='example-3'>
       {date ? renderCountDown() : renderButton()}
       <div
-        className={cx('backdrop', { 'backdrop--visible': showModal })}
+        className={cx('backdrop', { 'visible': showModal })}
         onClick={() => setShowModal(false)}
       />
-      <div className={cx('modal', { 'modal--visible': showModal })}>
+      <div className={cx('modal', { 'visible': showModal })}>
         <Calendar
           customDateClick={(dt) => {
             setDate(dt.toLocaleString(DateTime.DATE_HUGE));

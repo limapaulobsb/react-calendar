@@ -1,9 +1,9 @@
 .calendar {
   /* Custom properties */
   --main-bg-color: white;
+  --header-bg-color: rgb(45 45 90);
   --alt-bg-color: steelblue;
   --hover-bg-color: skyblue;
-  --header-bg-color: rgb(45 45 90);
   --main-text-color: black;
   --alt-text-color: white;
   --disabled-arrow-color: rgb(30 30 30);
@@ -13,6 +13,8 @@
   color: var(--main-text-color);
   display: flex;
   flex-direction: column;
+  height: 350px;
+  width: 280px;
 }
 
 .calendar__header {

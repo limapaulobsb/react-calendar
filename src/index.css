@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
 
 * {
   box-sizing: border-box;
@@ -85,32 +86,32 @@ header {
   background-image: linear-gradient(rgb(15 15 15), rgb(30 30 45));
 }
 
-.features > div:first-of-type,
-.features > div:nth-of-type(2) {
+.example-1-container,
+.example-2-container {
   align-items: center;
   display: flex;
   justify-content: space-evenly;
 }
 
-.features > div:nth-of-type(2) {
+.example-2-container {
   margin: 40px 0;
 }
 
-.features > div:nth-of-type(3) {
+.languages-and-styles-container {
   align-items: center;
   display: flex;
   flex-direction: column;
 }
 
-.languages {
+.languages-and-styles-container > div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 40px 0;
+  margin: 80px 0;
   width: 100%;
 }
 
-.languages .calendar {
+.languages-and-styles-container > div .calendar {
   margin-bottom: 20px;
 }
 
@@ -141,16 +142,15 @@ header {
     padding: 0;
   }
 
-  .hero__calendar-container {
+  .hero > div {
     display: none;
   }
 
-  .features > div:first-of-type {
+  .example-1-container {
     flex-direction: column-reverse;
   }
 
-  .features > div:nth-of-type(2) {
-    background-color: unset;
+  .example-2-container {
     flex-direction: column;
   }
 }

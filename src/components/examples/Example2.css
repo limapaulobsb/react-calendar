@@ -8,12 +8,12 @@
   position: relative;
 }
 
-.example-2__button-group > div {
+.example-2-input-group {
   align-items: center;
   display: flex;
 }
 
-.example-2__input {
+.example-2-input {
   background-color: rgb(210 210 255);
   border: none;
   border-bottom-left-radius: 6px;
@@ -26,7 +26,7 @@
   width: 190px;
 }
 
-.example-2__button {
+.example-2-button {
   background-color: rgb(60 90 255);
   background-image: radial-gradient(
     100% 100% at 0 0,
@@ -45,11 +45,11 @@
   width: 50px;
 }
 
-.example-2__button:active {
+.example-2-button:active {
   box-shadow: 0 4px 4px rgb(60 90 120) inset;
 }
 
-.example-2__calendar-container {
+.example-2-calendar-container {
   left: 0;
   position: absolute;
   top: 0;

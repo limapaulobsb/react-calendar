@@ -20,7 +20,7 @@
   font-size: 2rem;
 }
 
-.example-1__button {
+.example-1-button {
   background-image: radial-gradient(
     100% 100% at 0 0,
     rgb(210 210 255) 0,
@@ -37,11 +37,11 @@
   width: 100%;
 }
 
-.example-1__button:active {
+.example-1-button:active {
   box-shadow: 0 4px 4px rgb(60 90 120) inset;
 }
 
-.example-1__calendar-container {
+.example-1-calendar-container {
   left: -140px;
   opacity: 0;
   position: absolute;
@@ -50,7 +50,7 @@
   visibility: hidden;
 }
 
-.example-1__calendar-container--visible {
+.example-1-calendar-container.visible {
   left: 0;
   opacity: 1;
   visibility: visible;

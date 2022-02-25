@@ -20,24 +20,14 @@ function Calendar({
   ariaPrevBtn = 'Previous',
   customDateClick = () => {},
   fixed,
-  fontSize = '16px',
-  height = '350px',
   lang = 'en-US',
   max = { day: 31, month: 12, year: 2100 },
   min = { day: 1, month: 1, year: 1900 },
   monthsOnly,
   start,
-  width = '280px',
+  style,
 }) {
-  // Configure language and style settings
-
   Settings.defaultLocale = lang;
-
-  const styleSettings = {
-    fontSize,
-    height,
-    width,
-  };
 
   // Defines maximum, minimum and current date objects based on Props.
 
@@ -159,7 +149,7 @@ function Calendar({
   // Main element render.
 
   return (
-    <div className='calendar' style={styleSettings}>
+    <div className='calendar' style={style}>
       {renderCalendarHeader()}
       {showMonths ? (
         renderMonthButtons()
@@ -180,14 +170,12 @@ Calendar.propTypes = {
   ariaNextBtn: PropTypes.string,
   customDateClick: PropTypes.func,
   fixed: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  fontSize: PropTypes.string,
-  height: PropTypes.string,
   lang: PropTypes.string,
   max: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   min: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   monthsOnly: PropTypes.bool,
   start: PropTypes.object,
-  width: PropTypes.string,
+  style: PropTypes.object,
 };
 
 export default Calendar;

@@ -18,14 +18,14 @@ function Example1() {
       <span>{year}</span>
       <button
         type='button'
-        className='example-1__button'
+        className='example-1-button'
         onClick={() => setShowCalendar(true)}
       >
         Show calendar
       </button>
       <div
-        className={cx('example-1__calendar-container', {
-          'example-1__calendar-container--visible': showCalendar,
+        className={cx('example-1-calendar-container', {
+          'visible': showCalendar,
         })}
       >
         <Calendar

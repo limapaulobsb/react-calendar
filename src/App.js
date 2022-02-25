@@ -6,6 +6,16 @@ import Example2 from './components/examples/Example2';
 import Example3 from './components/examples/Example3';
 
 function App() {
+  const altStyle = {
+    '--main-bg-color': 'rgb(165 165 210)',
+    '--header-bg-color': 'rgb(210 135 120)',
+    '--alt-bg-color': 'rgb(90 90 150)',
+    '--hover-bg-color': 'rgb(180 150 150)',
+    '--main-text-color': 'white',
+    '--disabled-date-color': 'rgb(120 120 120)',
+    height: '300px',
+  };
+
   return (
     <main>
       <header>
@@ -22,44 +32,47 @@ function App() {
             Luxon.
           </a>
         </h2>
-        <div className='hero__calendar-container'>
-          <Calendar height='500px' width='500px' fontSize='18px' />
+        <div>
+          <Calendar style={{ fontSize: '18px', height: '500px', width: '500px' }} />
         </div>
       </section>
       <section className='features'>
         <h1>Use your creativity!</h1>
-        <div>
+        <div className='example-1-container'>
           <Example1 />
           <h3>
             The <code>customDateClick</code> prop allows you to easily control the outcome
             when a date is clicked.
           </h3>
         </div>
-        <div>
+        <div className='example-2-container'>
           <h3>
             Props like <code>fixed</code>, <code>max</code> and <code>min</code> allow you
             to manage avaible date ranges.
           </h3>
           <Example2 />
         </div>
-        <div>
-          <h3>Try it in different languages!</h3>
+        <div className='languages-and-styles-container'>
+          <h3>Try it in different languages and styles!</h3>
           <h4>*Don&apos;t forget to set proper ARIA labels for better accessibility.</h4>
-          <div className='languages'>
+          <div>
             <Calendar
               lang='es'
               ariaNextBtn='Próxima'
               ariaPrevBtn='Previa'
-              width='280px'
-              height='300px'
+              style={altStyle}
             />
-            <Calendar lang='de' ariaNextBtn='Nächste' ariaPrevBtn='Vorherige' />
+            <Calendar
+              lang='de'
+              ariaNextBtn='Nächste'
+              ariaPrevBtn='Vorherige'
+              style={{ fontFamily: 'Architects Daughter', fontSize: '18px' }}
+            />
             <Calendar
               lang='pt-BR'
               ariaNextBtn='Próxima'
               ariaPrevBtn='Anterior'
-              width='280px'
-              height='300px'
+              style={altStyle}
             />
           </div>
         </div>
