@@ -1,4 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+// General notes
+
+// Date Object data is very accurate, so startOf() and endOf() methods are very important
+// especially for date comparisons.
+
+// Date Object declarations should always be made from Luxon methods to avoid shallow copying.
+
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { DateTime, Settings } from 'luxon';
 import cx from 'classnames';
@@ -13,16 +20,26 @@ function Calendar({
   ariaPrevBtn = 'Previous',
   customDateClick = () => {},
   fixed,
-  fontSize,
-  height,
+  fontSize = '16px',
+  height = '350px',
   lang = 'en-US',
   max = { day: 31, month: 12, year: 2100 },
   min = { day: 1, month: 1, year: 1900 },
   monthsOnly,
   start,
-  width,
+  width = '280px',
 }) {
+  // Configure language and style settings
+
   Settings.defaultLocale = lang;
+
+  const styleSettings = {
+    fontSize,
+    height,
+    width,
+  };
+
+  // Defines maximum, minimum and current date objects based on Props.
 
   let maxDt, minDt;
   if (typeof fixed === 'string') {
@@ -40,28 +57,27 @@ function Calendar({
 
   const nowDt = DateTime.now().startOf('day');
 
+  // Defines start date object based on previous declarations and 'start' Prop.
+
   let startDt;
   if (start) startDt = DateTime.fromObject(start);
   else if (nowDt >= minDt && nowDt <= maxDt) startDt = DateTime.now().startOf('day');
   else if (typeof fixed === 'object') startDt = DateTime.fromObject(fixed);
   else startDt = DateTime.fromObject(min);
 
-  const calendarRef = useRef();
+  // React Hooks
+
   const [selectedDt, setSelectedDt] = useState(startDt);
   const [showMonths, setShowMonths] = useState(monthsOnly);
 
-  useEffect(() => {
-    if (fontSize) calendarRef.current.style.fontSize = fontSize;
-    if (height) calendarRef.current.style.height = height;
-    if (width) calendarRef.current.style.width = width;
-  }, [fontSize, height, width]);
+  // Function declarations.
 
   const renderCalendarHeader = () => (
     <div className='calendar__header'>
       <div>
         <button
           type='button'
-          className='calendar__header__arrow-button'
+          className='calendar__arrow-button'
           aria-label={ariaPrevBtn}
           onClick={() => {
             setSelectedDt(selectedDt.minus(!showMonths ? { month: 1 } : { year: 1 }));
@@ -74,10 +90,10 @@ function Calendar({
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
       </div>
-      <div className='calendar__header__main-button-container'>
+      <div className='calendar__main-button-container'>
         <button
           type='button'
-          className='calendar__header__main-button'
+          className='calendar__main-button'
           onClick={() => setShowMonths(!showMonths)}
           disabled={
             showMonths || (minDt.hasSame(maxDt, 'month') && minDt.hasSame(maxDt, 'year'))
@@ -89,7 +105,7 @@ function Calendar({
       <div>
         <button
           type='button'
-          className='calendar__header__arrow-button'
+          className='calendar__arrow-button'
           aria-label={ariaNextBtn}
           onClick={() => {
             setSelectedDt(selectedDt.plus(!showMonths ? { month: 1 } : { year: 1 }));
@@ -118,7 +134,7 @@ function Calendar({
             type='button'
             key={el.monthLong}
             className={cx('calendar__month-button', {
-              'bg--alt':
+              'calendar__month-button--alt-bg':
                 el.toMillis() === nowDt.startOf('month').toMillis() &&
                 el > minDt.startOf('month') &&
                 el < maxDt,
@@ -140,8 +156,10 @@ function Calendar({
     );
   };
 
+  // Main element render.
+
   return (
-    <div className='calendar' ref={calendarRef}>
+    <div className='calendar' style={styleSettings}>
       {renderCalendarHeader()}
       {showMonths ? (
         renderMonthButtons()

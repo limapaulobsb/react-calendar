@@ -13,9 +13,14 @@ function App() {
       </header>
       <section className='hero'>
         <h2>
-          A simple, highly customizable calendar component built with{' '}
-          <a href='https://reactjs.org/'>React</a> and{' '}
-          <a href='https://moment.github.io/luxon'>Luxon</a>.
+          A powerful, highly customizable calendar component built with&ensp;
+          <a href='https://reactjs.org/' target='_blank' rel='noreferrer'>
+            React
+          </a>
+          &ensp;and&ensp;
+          <a href='https://moment.github.io/luxon' target='_blank' rel='noreferrer'>
+            Luxon.
+          </a>
         </h2>
         <div className='hero__calendar-container'>
           <Calendar height='500px' width='500px' fontSize='18px' />

@@ -6,7 +6,7 @@
 
 .example-3 h2 {
   cursor: pointer;
-  margin: 40px 0 40px;
+  margin: 40px 0;
   user-select: none;
 }
 
@@ -20,8 +20,37 @@
   margin: 40px 0 10px;
 }
 
+.example-3__button {
+  background-color: rgb(60 90 255);
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  height: 60px;
+  max-width: 400px;
+  position: relative;
+  transform: rotate(-2deg);
+  width: calc(100% - 20px);
+}
+
+.example-3__button::after {
+  border: 1px solid white;
+  bottom: 4px;
+  content: '';
+  height: 100%;
+  left: 4px;
+  position: absolute;
+  width: 100%;
+}
+
+.example-3__button:hover::after {
+  bottom: 2px;
+  left: 2px;
+}
+
 .example-3 .backdrop {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0 0 0 / 80%);
   height: 100vh;
   left: 0;
   opacity: 0;
@@ -51,35 +80,6 @@
 .example-3 .modal--visible {
   opacity: 1;
   visibility: visible;
-}
-
-.example-3__button {
-  background-color: rgb(60, 90, 255);
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 1rem;
-  height: 60px;
-  max-width: 400px;
-  position: relative;
-  transform: rotate(-2deg);
-  width: calc(100% - 20px);
-}
-
-.example-3__button:after {
-  border: 1px solid white;
-  bottom: 4px;
-  content: '';
-  height: 100%;
-  left: 4px;
-  position: absolute;
-  width: 100%;
-}
-
-.example-3__button:hover:after {
-  bottom: 2px;
-  left: 2px;
 }
 
 @media screen and (max-width: 768px) {

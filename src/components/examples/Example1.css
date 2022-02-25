@@ -23,12 +23,12 @@
 .example-1__button {
   background-image: radial-gradient(
     100% 100% at 0 0,
-    rgb(210, 210, 255) 0,
-    rgb(60, 90, 255) 100%
+    rgb(210 210 255) 0,
+    rgb(60 90 255) 100%
   );
   border: none;
   border-radius: 6px;
-  box-shadow: 0 -4px 0 rgba(60, 60, 90, 0.6) inset;
+  box-shadow: 0 -4px 0 rgba(60 60 90 / 60%) inset;
   color: white;
   cursor: pointer;
   font-family: inherit;
@@ -38,7 +38,7 @@
 }
 
 .example-1__button:active {
-  box-shadow: 0 4px 4px rgb(60, 90, 120) inset;
+  box-shadow: 0 4px 4px rgb(60 90 120) inset;
 }
 
 .example-1__calendar-container {

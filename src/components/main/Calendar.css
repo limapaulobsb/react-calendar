@@ -1,31 +1,29 @@
 .calendar {
-  background-color: white;
-  color: black;
+  /* Custom properties */
+  --main-bg-color: white;
+  --alt-bg-color: steelblue;
+  --hover-bg-color: skyblue;
+  --header-bg-color: rgb(45 45 90);
+  --main-text-color: black;
+  --alt-text-color: white;
+  --disabled-arrow-color: rgb(30 30 30);
+  --disabled-date-color: rgb(180 180 180);
+
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
   display: flex;
   flex-direction: column;
-  height: 350px;
-  width: 280px;
-}
-
-.calendar abbr {
-  border-bottom: 1px dotted black;
-  font-size: 0.8em;
-  text-decoration: none;
-}
-
-.calendar .bg--alt {
-  background-color: steelblue;
 }
 
 .calendar__header {
   align-items: center;
-  background-color: rgb(45, 45, 90);
+  background-color: var(--header-bg-color);
   display: flex;
   height: 20%;
-  padding: 0 10px;
+  padding: 0 0.75em;
 }
 
-.calendar__header__main-button-container {
+.calendar__main-button-container {
   flex-grow: 10;
   text-align: center;
 }
@@ -34,11 +32,17 @@
   display: grid;
   flex-grow: 10;
   grid-template-columns: repeat(7, 1fr);
-  padding: 10px;
+  padding: 0.5em;
 }
 
 .calendar__weekday-container {
   text-align: center;
+}
+
+.calendar__weekday-abbr {
+  border-bottom: 1px dotted var(--main-text-color);
+  font-size: 0.8em;
+  text-decoration: none;
 }
 
 .calendar__month-buttons-container {
@@ -47,40 +51,58 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
-.calendar button {
+.calendar__main-button,
+.calendar__arrow-button,
+.calendar__date-button,
+.calendar__month-button {
   background-color: transparent;
   border: none;
   cursor: pointer;
   font-family: inherit;
 }
 
-.calendar button:disabled {
-  cursor: initial;
-}
-
-.calendar__header__arrow-button {
-  color: white;
-  font-size: 2em;
-}
-
-.calendar__header__arrow-button:disabled {
-  color:  rgb(30, 30, 30)
-}
-
-.calendar__header__main-button {
-  color: white;
+.calendar__main-button {
+  color: var(--alt-text-color);
   font-size: 1em;
 }
 
+.calendar__arrow-button {
+  color: var(--alt-text-color);
+  font-size: 2em;
+}
+
 .calendar__date-button {
+  color: inherit;
   font-size: 1em;
 }
 
 .calendar__month-button {
+  color: inherit;
   font-size: 0.9em;
+}
+
+.calendar__date-button--alt-bg,
+.calendar__month-button--alt-bg {
+  background-color: var(--alt-bg-color);
+}
+
+.calendar__main-button:disabled,
+.calendar__arrow-button:disabled,
+.calendar__date-button:disabled,
+.calendar__month-button:disabled {
+  cursor: initial;
+}
+
+.calendar__arrow-button:disabled {
+  color: var(--disabled-arrow-color);
+}
+
+.calendar__date-button:disabled,
+.calendar__month-button:disabled {
+  color: var(--disabled-date-color);
 }
 
 .calendar__date-button:not(:disabled):hover,
 .calendar__month-button:not(:disabled):hover {
-  background-color: skyblue;
+  background-color: var(--hover-bg-color);
 }

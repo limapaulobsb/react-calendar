@@ -10,8 +10,8 @@ function Example2() {
   const inputRef = [useRef(), useRef(), useRef()];
   const [showCalendar, setShowCalendar] = useState(-1);
 
-  const { month } = DateTime.now().plus({ month: 1 });
-  const { year } = DateTime.now();
+  const { month: nextMonth } = DateTime.now().plus({ month: 1 });
+  const { year: currentYear } = DateTime.now();
 
   const renderButtonGroup = (i, label) => (
     <div className='example-2__button-group'>
@@ -46,7 +46,7 @@ function Example2() {
               inputRef[0].current.value = dt.toLocaleString(DateTime.DATE_SHORT);
               setShowCalendar(-1);
             }}
-            fixed={{ month }}
+            fixed={{ month: nextMonth }}
           />
         </div>
       )}
@@ -58,8 +58,8 @@ function Example2() {
               inputRef[1].current.value = dt.toLocaleString(DateTime.DATE_SHORT);
               setShowCalendar(-1);
             }}
-            fixed={{ year }}
-            start={{ month: 1, year }}
+            fixed={{ year: currentYear }}
+            start={{ month: 1, year: currentYear }}
           />
         </div>
       )}
